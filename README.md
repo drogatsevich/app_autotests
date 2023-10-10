@@ -13,4 +13,5 @@
 
 1. Клонируйте репозиторий: `git clone`
 2. Отредактируйте файл TestConfig, указав настройки для Appium, Android и приложения.
-3. Запустите тесты: `mvn test`
+3. Запустите тесты: `mvn clean test`
+4. Отчет: `target\surefire-reports\index.html`

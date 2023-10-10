@@ -66,7 +66,6 @@ public class BasePage {
      */
     protected Boolean isElementDisplayed(By by) {
         try {
-            //waitForVisibility(driver.findElement(by));
             return driver.findElement(by).isDisplayed();
         } catch (Exception e) {
             return false;

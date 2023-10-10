@@ -15,7 +15,6 @@ public class AuthorizationTests extends BaseTest {
 
     @BeforeClass
     public void setUp() {
-        super.setUp();
         loginPage = new LoginPage(driver);
         homePage = new HomePage(driver);
     }
@@ -67,7 +66,7 @@ public class AuthorizationTests extends BaseTest {
 
     @Test(description = "Проверка маскирования пароля")
     public void testPasswordMasking() {
-        // Ввести корректный логин в поле "Логин"
+        // Ввести корректный логин и пароль
         loginPage.inputLoginAndPassword("Login", "Password");
 
         // Проверить, что в поле "Пароль" символы маскируются символом '•'

@@ -9,10 +9,10 @@ public class LoginPage extends BasePage {
     private static final String ERROR_TEMPLATE = "android.widget.TextView[text = '%s']";
 
     // Локаторы элементов на странице
-    private By usernameField = By.xpath("//android.widget.EditText[@resource-id = 'com.alfabank.qapp:id/etUsername']");
-    private By passwordField = By.xpath("//android.widget.EditText[@resource-id = 'com.alfabank.qapp:id/etPassword']");
-    private By loginButton = By.xpath("//android.widget.Button[@resource-id = 'com.alfabank.qapp:id/btnConfirm']");
-    private By showPasswordButton = By.xpath("//android.widget.ImageButton[@resource-id = 'com.alfabank.qapp:id/text_input_end_icon']");
+    private final By usernameField = By.xpath("//android.widget.EditText[@resource-id = 'com.alfabank.qapp:id/etUsername']");
+    private final By passwordField = By.xpath("//android.widget.EditText[@resource-id = 'com.alfabank.qapp:id/etPassword']");
+    private final By loginButton = By.cssSelector("android.widget.Button[resource-id = 'com.alfabank.qapp:id/btnConfirm']");
+    private final By showPasswordButton = By.xpath("//android.widget.ImageButton[@resource-id = 'com.alfabank.qapp:id/text_input_end_icon']");
 
     public LoginPage(AndroidDriver<AndroidElement> driver) {
         super(driver);
