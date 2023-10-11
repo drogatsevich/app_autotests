@@ -15,6 +15,7 @@ public class AuthorizationTests extends BaseTest {
 
     @BeforeClass
     public void setUp() {
+        super.setUp();
         loginPage = new LoginPage(driver);
         homePage = new HomePage(driver);
     }
