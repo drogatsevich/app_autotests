@@ -9,37 +9,22 @@ import java.net.URL;
 
 public class DriverManager {
 
-    protected AndroidDriver<AndroidElement> driver;
+    private static DriverManager instance;
+    private AndroidDriver<AndroidElement> driver;
 
-    /**
-     * Инициализация Андроид драйвера
-     */
-    public void initializeAndroidDriver() {
-        DesiredCapabilities caps = new DesiredCapabilities();
-        caps.setCapability("platformName", TestConfig.PLATFORM_NAME);
-        caps.setCapability("deviceName", TestConfig.DEVICE_NAME);
-        caps.setCapability("appPackage", TestConfig.APP_PACKAGE); // пакет приложения
-        caps.setCapability("appActivity", TestConfig.APP_ACTIVITY); // активность приложения
-        caps.setCapability("automationName", TestConfig.AUTOMATION_NAME);
-        caps.setCapability("uiautomator2ServerLaunchTimeout", TestConfig.UIAUTOMATOR_2_SERVER_LAUNCH_TIMEOUT);
-        caps.setCapability("app", TestConfig.APP);
-
-        try {
-            driver = new AndroidDriver<>(new URL(TestConfig.APPIUM_SERVER_URL), caps);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-            throw new RuntimeException("Failed to initialize Appium driver");
-        }
+    private DriverManager() {
+        // Приватный конструктор, чтобы предотвратить создание новых экземпляров
     }
 
     /**
-     * Закрыть драйвер
+     * Получить экземпляр класса
+     * @return DriverManager
      */
-    public void quitDriver() {
-        if (driver != null) {
-            driver.quit();
-            driver = null;
+    public static DriverManager getInstance() {
+        if (instance == null) {
+            instance = new DriverManager();
         }
+        return instance;
     }
 
     /**
@@ -52,5 +37,38 @@ public class DriverManager {
             initializeAndroidDriver();
         }
         return driver;
+    }
+
+    /**
+     * Инициализация Андроид драйвера
+     */
+    public void initializeAndroidDriver() {
+        if (driver == null) {
+            DesiredCapabilities caps = new DesiredCapabilities();
+            caps.setCapability("platformName", TestConfig.PLATFORM_NAME);
+            caps.setCapability("deviceName", TestConfig.DEVICE_NAME);
+            caps.setCapability("appPackage", TestConfig.APP_PACKAGE);
+            caps.setCapability("appActivity", TestConfig.APP_ACTIVITY);
+            caps.setCapability("automationName", TestConfig.AUTOMATION_NAME);
+            caps.setCapability("uiautomator2ServerLaunchTimeout", TestConfig.UIAUTOMATOR_2_SERVER_LAUNCH_TIMEOUT);
+            caps.setCapability("app", TestConfig.APP);
+
+            try {
+                driver = new AndroidDriver<>(new URL(TestConfig.APPIUM_SERVER_URL), caps);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+                throw new RuntimeException("Failed to initialize Appium driver");
+            }
+        }
+    }
+
+    /**
+     * Закрыть драйвер
+     */
+    public void quitDriver() {
+        if (driver != null) {
+            driver.quit();
+            driver = null;
+        }
     }
 }

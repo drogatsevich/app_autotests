@@ -7,23 +7,23 @@ import org.testng.annotations.AfterMethod;
 
 public class BaseTest {
 
-    private final DriverManager driverManager = new DriverManager();
-
     protected AndroidDriver<AndroidElement> driver;
 
     public void setUp() {
-        driverManager.initializeAndroidDriver();
-        driver = driverManager.getDriver();
+        DriverManager.getInstance().initializeAndroidDriver();
+        driver = DriverManager.getInstance().getDriver();
     }
 
     @AfterClass
     public void tearDown() {
-        driverManager.quitDriver();
+        DriverManager.getInstance().quitDriver();
     }
 
+    /**
+     * Закрыть приложение после каждого теста
+     */
     @AfterMethod
     public void resetApp() {
-        // Закрыть приложение после каждого теста
         driver.resetApp();
     }
 }
